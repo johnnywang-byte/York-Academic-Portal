@@ -128,7 +128,7 @@ Project2026/
 
 * Computer Science Student @ York University
 * [LinkedIn](https://www.linkedin.com/in/johnny-wang-652820337/)
-* [GitHub](https://www.google.com/search?q=https://github.com/johnnywang-byte)
+* [GitHub](https://github.com/johnnywang-byte)
 
 ---
 
