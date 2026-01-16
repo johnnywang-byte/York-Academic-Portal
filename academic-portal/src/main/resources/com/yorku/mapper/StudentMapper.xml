@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yorku.mapper.StudentMapper">
+
+    <select id="list" resultType="com.yorku.pojo.Student">
+        select s.*, c.name clazzName
+        from student s left join clazz c on s.clazz_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                s.name like concat('%',#{name},'%')
+            </if>
+            <if test="yearLevel != null">
+                and s.year_level = #{yearLevel}
+            </if>
+            <if test="clazzId != null">
+                and s.clazz_id = #{clazzId}
+            </if>
+        </where>
+        order by s.update_time desc
+    </select>
+
+    <insert id="save">
+        insert into student
+        (name, no, gender, phone, id_card, enrollment_status, address, year_level, graduation_date, clazz_id, gpa, credits, create_time, update_time)
+        values
+            (#{name}, #{no}, #{gender}, #{phone}, #{idCard}, #{enrollmentStatus}, #{address}, #{yearLevel}, #{graduationDate}, #{clazzId}, #{gpa}, #{credits}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="findById" resultType="com.yorku.pojo.Student">
+        select id, name, no, gender, phone, id_card, enrollment_status, address, year_level, graduation_date, clazz_id, gpa, credits, create_time, update_time
+        from student where id = #{id}
+    </select>
+
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="no != null and no != ''">no = #{no},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="idCard != null and idCard != ''">id_card = #{idCard},</if>
+            <if test="enrollmentStatus != null">enrollment_status = #{enrollmentStatus},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="yearLevel != null">year_level = #{yearLevel},</if>
+            <if test="graduationDate != null">graduation_date = #{graduationDate},</if>
+            <if test="clazzId != null">clazz_id = #{clazzId},</if>
+            <if test="gpa != null">gpa = #{gpa},</if>
+            <if test="credits != null">credits = #{credits},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from student where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateGPA">
+        update student set gpa = #{gpa}, update_time = now()
+        where id = #{id}
+    </update>
+
+    <select id="countStuNumData" resultType="map">
+        SELECT c.name as name, COUNT(s.id) as value
+        FROM clazz c JOIN student s ON c.id = s.clazz_id
+        GROUP BY c.name
+    </select>
+
+    <select id="countStuYearLevelData" resultType="java.util.Map">
+        select
+            (case when year_level=1 then '1st Year'
+                  when year_level=2 then '2nd Year'
+                  when year_level=3 then '3rd Year'
+                  when year_level=4 then '4th Year'
+                  when year_level=5 then 'Graduate'
+                  else 'Alumni' end) as name,
+            count(*) value
+        from student group by year_level
+    </select>
+
+</mapper>

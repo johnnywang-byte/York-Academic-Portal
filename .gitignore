@@ -1,0 +1,84 @@
+# ==============================================
+#           Global System Files / 全局系统文件
+# ==============================================
+.DS_Store
+Thumbs.db
+.fseventsd
+.Spotlight-V100
+.Trashes
+
+# ==============================================
+#           IDE & Editors / 开发工具配置
+# ==============================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# ==============================================
+#           Backend (Java/Spring Boot) / 后端
+# ==============================================
+# Compiled class files / 编译后的类文件
+*.class
+
+# Log files / 日志文件
+*.log
+
+# Maven build folder (Important!) / Maven构建目录 (非常重要! 不要传)
+target/
+
+# Package files / 打包文件
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Spring Boot specific / Spring Boot 特定配置
+help.md
+mvnw
+mvnw.cmd
+.mvn/
+
+# Security: Prevent uploading passwords / 安全: 防止上传密码配置
+# Uncomment below if you use separate dev config / 如果你有独立的dev配置请取消注释
+# application-dev.yml
+
+# ==============================================
+#           Frontend (Vue/Node) / 前端
+# ==============================================
+# Dependencies (Huge folder!) / 依赖包 (巨大! 绝对不要传)
+node_modules/
+
+# Build output / 构建打包输出目录
+dist/
+dist-ssr/
+
+# Logs / 前端日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment variables / 本地环境变量
+.env.local
+.env.*.local
+
+# Cypress testing artifacts / 测试截图与录屏
+/cypress/videos/
+/cypress/screenshots/
+
+# Editor directories inside frontend / 前端内的编辑器配置
+.eslintcache
